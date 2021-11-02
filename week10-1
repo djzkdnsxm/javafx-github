@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+public class Test extends JFrame {
+	JButton btn1, btn2;
+	JPanel pnl;
+	JLabel lbl;
+	Test.MyActionListener3 listener;
+		
+	Test() {
+		setTitle("Action이벤트 클래스 리스너 작성");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		pnl = new JPanel();
+		
+		btn1 = new JButton("핑크");
+		listener = new MyActionListener3(); //  클래스 호출
+		btn1.addActionListener(listener);
+		pnl.add(btn1);
+		
+		btn2 = new JButton("녹색");
+		btn2.addActionListener(listener);
+		pnl.add(btn2);
+		
+		add(pnl);
+		
+		setSize(400,200);
+		setVisible(true);
+	}
+	
+	public static void main(String [] args) {
+		new Test ();
+	}
+	class MyActionListener3 implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getSource()==btn1) {
+				pnl.setBackground(Color.pink);
+			}
+			if(e.getSource()==btn2) {
+				pnl.setBackground(Color.green);
+				
+			}
+			
+		}
+		
+	}
+}
