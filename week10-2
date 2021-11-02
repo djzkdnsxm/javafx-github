@@ -1,0 +1,54 @@
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+public class Test extends JFrame {
+	JTextField jf = new JTextField(15);
+	JButton btn1 = new JButton("변환"); 
+	JButton btn2 = new JButton("종료");
+	JTextField jd = new JTextField(15);
+	Test() {
+		setTitle("마일을 킬로미터로");
+		setLayout(new GridLayout(3,1));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JLabel j1=new JLabel("거리를 마일 단위로 입력하시오");
+		JPanel jp1= new JPanel();
+		JPanel jp2= new JPanel();
+		JPanel jp3= new JPanel();
+		jp1.add(j1);
+		jp1.add(jf);
+		jp2.add(btn1);
+		jp2.add(btn2);
+		jp3.add(jd);
+		MyActionListener2 listener = new MyActionListener2 ();
+		btn1.addActionListener(listener ); 
+		btn2.addActionListener(listener ); 
+		add(jp1);
+		add(jp2);
+		add(jp3);
+		setSize(400,200);
+		setVisible(true);
+	}
+	
+	public static void main(String [] args) {
+		new Test ();
+	}
+	class MyActionListener2 implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getSource()==btn1) {
+			int b1=Integer.parseInt(jf.getText());
+			double b2=b1*1.6;
+			jd.setText(b1+"마일은"+b2+"킬로미터입니다");
+			}
+			if(e.getSource()==btn2) {
+			jf.setText("");
+			jd.setText("");
+			}
+			
+		}
+		
+	}
+}
