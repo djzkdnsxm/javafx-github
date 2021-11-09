@@ -37,13 +37,13 @@ public class Test extends JFrame {
 			else
 				selected = -1;
 			if(e.getItem() == aa[0]) 
-				sum = sum + selected*100;
+				sum = sum + selected*45000;
 			else if(e.getItem() == aa[1]) 
-				sum = sum + selected*500;
+				sum = sum + selected*80000;
 			else if(e.getItem() == aa[2]) 
-				sum = sum + selected*1500;
+				sum = sum + selected*30000;
 			else
-				sum = sum + selected*20000;
+				sum = sum + selected*100000;
 
 			sumLabel.setText("현재 "+sum+"원 입니다.");
 		}
