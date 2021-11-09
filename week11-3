@@ -1,0 +1,90 @@
+import java.util.Vector;
+
+import javax.swing.JCheckBox;
+import javax.swing.*;
+import javax.swing.JTextField;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.*;
+
+public class Test extends JFrame {
+	
+	private int[] exchange = {50000,10000,1000,500,100,50,10,1};
+	private String[] texts= {"오만원","만원","천원","500원","100원","50원","10원","1원"};
+	private JTextField tf[] =new JTextField[8];
+	private JTextField PriceField;
+	private JCheckBox Boxs[]=new JCheckBox[7];
+	
+	public Test() {
+		setTitle("Money Changer with CheckBox");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(null); c.setBackground(Color.pink);
+		
+		JLabel price =new JLabel("금액");
+		price.setSize(40,20); price.setLocation(20, 20);
+		c.add(price);
+		
+		PriceField = new JTextField(30);
+		PriceField.setSize(100,20); PriceField.setLocation(70,20);
+		c.add(PriceField);
+		
+		JButton btn = new JButton("계산");
+		btn.setSize(80,20); btn.setLocation(190,20);
+		btn.addActionListener(new ActionListener() {
+			@Override 
+			public void actionPerformed(ActionEvent e) {
+				
+				String input=PriceField.getText();
+				if(input.length()==0) {
+					return;
+				}
+				
+				int money = Integer.parseInt(PriceField.getText());
+				int remain=0;
+				
+				for(int i=0;i<exchange.length;i++) {
+					
+					if(i==exchange.length-1) {   // exchange가 1일 때 JCheckBox 유무상관없이 무조건 실행해야 하므로 설정
+						remain=money/exchange[i];
+						tf[i].setText(Integer.toString(remain));
+					}
+					
+					
+					if(!Boxs[i].isSelected()) {
+						tf[i].setText("0");
+						continue;
+											}
+					
+					remain=money/exchange[i];
+					tf[i].setText(Integer.toString(remain));
+					money=money%exchange[i];
+				
+					}
+					
+				
+				
+			}
+		});
+		c.add(btn); 
+		
+		for(int i=0 ; i<tf.length;i++) {
+			price=new JLabel(texts[i]); price.setSize(40,20); price.setLocation(50,50+i*20);
+			tf[i]=new JTextField("0",30); tf[i].setSize(100, 20); tf[i].setLocation(110, 50+i*20);
+			c.add(price); c.add(tf[i]);
+		}
+		
+		for(int i=0;i<Boxs.length;i++) {
+			Boxs[i]=new JCheckBox();
+			Boxs[i].setSize(40, 20); Boxs[i].setOpaque(true); Boxs[i].setBackground(Color.PINK);
+			Boxs[i].setLocation(220,50+i*20);
+			c.add(Boxs[i]);
+		}
+		setSize(300,300);
+		setVisible(true);
+	}
+	public static void main(String[]args) {
+		new Test();
+	}
+}
