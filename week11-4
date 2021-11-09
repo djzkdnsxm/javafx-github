@@ -21,7 +21,6 @@ public class Test extends JFrame {
 		
 		for(int i=0; i<aa.length; i++) {
 			aa[i] = new JCheckBox(names[i]);
-			aa[i].setBorderPainted(true);
 			contentPane.add(aa[i]);
 			aa[i].addItemListener(new MyItemListener());
 		}
