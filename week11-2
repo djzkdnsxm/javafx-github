@@ -1,0 +1,112 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+ 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+ 
+public class Test extends JFrame implements ActionListener{
+ 
+    JLabel[] name = new JLabel[9];
+    JTextField[] txt = new JTextField[9];
+    JButton btn = new JButton();
+    
+    public Test(){
+        
+        setTitle("잔돈 교환");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    
+ 
+        name[0] = new JLabel("금액",JLabel.CENTER);
+        name[1] = new JLabel("오만원",JLabel.RIGHT);
+        name[2] = new JLabel("만원",JLabel.RIGHT);
+        name[3] = new JLabel("천원",JLabel.RIGHT);
+        name[4] = new JLabel("500원",JLabel.RIGHT);
+        name[5] = new JLabel("100원",JLabel.RIGHT);
+        name[6] = new JLabel("50원",JLabel.RIGHT);
+        name[7] = new JLabel("10원",JLabel.RIGHT);
+        name[8] = new JLabel("1원",JLabel.RIGHT);
+        
+        for(int i=0; i<9; i++){
+            switch(i){
+            case 0:
+                txt[i] = new JTextField(6);
+                break;
+            default:
+                txt[i] = new JTextField(4);
+            }
+        }
+        
+        btn = new JButton("계산");
+        
+ 
+        setLayout(null);
+        for(int i=0; i<9; i++){
+            if(i>0){
+                name[i].setBounds(0, 30+(i*25), 100, 20);
+                txt[i].setBounds(130,30+(i*25), 100, 20);
+            }
+            else{
+                name[i].setBounds(0, 20+(i*25), 100, 20);
+                txt[i].setBounds(120,20+(i*25), 120, 20);
+            }
+            add(name[i]);
+            add(txt[i]);
+        }
+        
+        btn.setBounds(260, 20, 100, 20);
+        add(btn);
+        
+       
+        btn.addActionListener(this);
+                
+        setSize(400, 320);
+        setLocation(700, 150);
+        setVisible(true);
+        
+    }
+ 
+    public void calculated(int _amount) throws NumberFormatException{
+        
+        int[] deg = {50000,10000,1000,500,100,50,10,1};
+        int temp = _amount;
+        int Q = 0;
+        
+        for(int i=0; i<8; i++){
+            
+            Q = temp/deg[i];
+            
+            if(Q>0){
+                temp = temp - Q*deg[i];
+                txt[i+1].setText(Integer.toString(Q));
+            }
+            else{
+                txt[i+1].setText("0");
+            }
+            
+        }
+        
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        int amount = 0;
+   
+        try{
+            amount = Integer.parseInt(txt[0].getText());
+        }
+        catch(NumberFormatException _e){
+            System.out.println("ERROR");
+        }
+        
+        calculated(amount);
+        
+    }
+    
+    public static void main(String[] args) {
+        new Test();
+    }
+ 
+}
