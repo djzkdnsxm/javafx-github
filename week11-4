@@ -1,0 +1,55 @@
+
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.*;
+
+public class Test extends JFrame {
+	private static final long serialVersionUID = 1L;
+	Container contentPane;
+	JCheckBox [] aa = new JCheckBox[4];
+	String [] names = {"엔진오일교환", "자동변속기교환", "에어컨필터교환","타이어교환"};
+	JLabel sumLabel;
+	int sum = 0;
+
+	Test() {
+		setTitle("체크박스와 ItemEvent  예제");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane = getContentPane();
+		contentPane.setLayout(new FlowLayout());						
+		
+		for(int i=0; i<aa.length; i++) {
+			aa[i] = new JCheckBox(names[i]);
+			aa[i].setBorderPainted(true);
+			contentPane.add(aa[i]);
+			aa[i].addItemListener(new MyItemListener());
+		}
+		sumLabel = new JLabel("현재 0 원 입니다.");
+		contentPane.add(sumLabel);
+		setSize(450,200);
+		setVisible(true);
+	}
+	class MyItemListener implements ItemListener {
+		public void itemStateChanged(ItemEvent e) {
+			int selected=1;
+			if(e.getStateChange() == ItemEvent.SELECTED)
+				selected = 1;
+			else
+				selected = -1;
+			if(e.getItem() == aa[0]) 
+				sum = sum + selected*100;
+			else if(e.getItem() == aa[1]) 
+				sum = sum + selected*500;
+			else if(e.getItem() == aa[2]) 
+				sum = sum + selected*1500;
+			else
+				sum = sum + selected*20000;
+
+			sumLabel.setText("현재 "+sum+"원 입니다.");
+		}
+	}
+	public static void main(String [] args) {
+		new Test();
+	}
+}
