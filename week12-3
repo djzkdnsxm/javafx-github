@@ -1,0 +1,39 @@
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.*;
+
+import test.MyPanel1;
+import test.MyPanel2;
+import test.Test2;
+
+public class test extends JFrame {
+	test(){
+		setTitle("삼원색 사용 예제");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		MyPanel1 panel = new MyPanel1();
+		add(panel);
+		setSize(255,257);
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new test();
+
+	}
+
+}
+class MyPanel1 extends JPanel {
+	public void paintComponent(Graphics g) {
+		for(int i=20;i<260;i+=20) {	
+		g.drawLine(i,0,i,250);
+		}
+		for(int k=20;k<260;k+=20) {	
+			g.drawLine(0,k,250,k);
+			}
+	}
+}
